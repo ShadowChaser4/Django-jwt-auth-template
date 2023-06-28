@@ -11,10 +11,12 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
 
 #setting of environment variable 
 import environ
 import os
+
 
 env = environ.Env()
 environ.Env.read_env()
@@ -118,7 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kathmandu'
 
 USE_I18N = True
 
@@ -140,3 +142,23 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #Auth User
 AUTH_USER_MODEL= "account.User"
+
+#REST Framework settings 
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES' : (
+        'rest_framework_simplejwt.authentication.JWTStatelessUserAuthentication',
+                                        ), 
+    
+}
+
+
+#JWT configuration 
+SIMPLE_JWT ={
+    "TOKEN_OBTAIN_SERIALIZER":"authentication.serializer.CustomTokenObtainPairSeralizer", 
+    
+    "AUTH_HEADER_TYPES": ("Bearer",), 
+    "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION", 
+    "USER_ID_CLAIM": 'sub', 
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
+}

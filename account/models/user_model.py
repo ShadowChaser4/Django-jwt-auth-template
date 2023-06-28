@@ -9,10 +9,15 @@ class User(AbstractUser):
     user have middle name that is optional
     """
     
-    usename = None
+    class Roles(models.TextChoices):
+        ADMIN = 'A',_("Admin")
+        USER = 'U', _("User")
+    
+    username = None
     email = models.EmailField(unique= True)
     middle_name = models.CharField(max_length=255, null= True, blank= True)
     is_superuser = models.BooleanField(default= False)
+    role = models.CharField(max_length=1, choices= Roles.choices)
     
     
     USERNAME_FIELD = 'email'
@@ -28,7 +33,7 @@ class User(AbstractUser):
         return self.email
     
     def get_full_name(self) -> str:
-        middle_name = self.middle_name if self.middle_name is not None else ''
-        return f'{self.first_name} {middle_name}'
+        middle_name = f'{self.middle_name} ' if self.middle_name is not None else ''
+        return f'{self.first_name} {middle_name}{self.last_name}'
     
     

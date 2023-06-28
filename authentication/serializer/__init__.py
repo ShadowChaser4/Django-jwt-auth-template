@@ -1,0 +1,1 @@
+from .jwt_seralizer import CustomTokenObtainPairSeralizer
