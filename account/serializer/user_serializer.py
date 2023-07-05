@@ -25,7 +25,7 @@ class ChoiceField(serializers.ChoiceField):
         self.fail('invalid_choice', input=data)
     
 
-class UserSeralizer(serializers.ModelSerializer): 
+class UserSerializer(serializers.ModelSerializer): 
     email = serializers.EmailField(
         max_length = 255, 
         validators = [validators.UniqueValidator(queryset=User.objects.all())]
