@@ -49,6 +49,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'environ',
+    'rest_framework',
+    'coreapi', # Coreapi for coreapi documentation
+    'drf_yasg', # drf_yasg fro Swagger documentation
     
     'account.apps.AccountConfig', 
     'authentication.apps.AuthenticationConfig',
@@ -161,4 +164,15 @@ SIMPLE_JWT ={
     "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION", 
     "USER_ID_CLAIM": 'sub', 
     "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
+}
+
+#Swagger settings
+SWAGGER_SETTINGS = {
+   'SECURITY_DEFINITIONS': {
+      'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+      },
+   }
 }
